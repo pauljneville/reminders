@@ -1,6 +1,6 @@
 import { FirebaseApp, initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
-import { getFirestore, addDoc, setDoc, doc, collection, onSnapshot } from 'firebase/firestore'
+import { getFirestore, addDoc as fs_addDoc, setDoc as fs_setDoc, doc as fs_doc, collection as fs_collection, onSnapshot as fs_onSnapshot, getDoc as fs_getDoc, writeBatch as fs_writeBatch } from 'firebase/firestore'
 import { getStorage } from 'firebase/storage'
 
 const firebaseConfig = {
@@ -22,8 +22,10 @@ export const googleSignOut = signOut;
 export const firestore = getFirestore(app);
 export const storage = getStorage(app);
 
-export const fs_addDoc = addDoc;
-export const fs_setDoc = setDoc;
-export const fs_doc = doc;
-export const fs_collection = collection;
-export const fs_onSnapshot = onSnapshot;
+export const addDoc = fs_addDoc;
+export const setDoc = fs_setDoc;
+export const doc = fs_doc;
+export const collection = fs_collection;
+export const onSnapshot = fs_onSnapshot;
+export const getDoc = fs_getDoc;
+export const writeBatch = fs_writeBatch;

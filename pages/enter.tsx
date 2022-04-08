@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState, useCallback } from 'react';
 import { UserContext } from '../lib/context';
-import { firestore, auth, googleAuthProvider, googleSignInWithPopup, googleSignOut, doc, getDoc, writeBatch } from '../lib/firebase';
+import { firestore, auth, googleAuthProvider, googleSignInWithPopup, googleSignOut } from '../lib/firebase';
+import { doc, getDoc, writeBatch } from 'firebase/firestore'
 import debounce from 'lodash.debounce';
 
 export default function EnterPage(props) {
@@ -71,7 +72,7 @@ const UsernameForm = () => {
             const ref = doc(firestore, `usernames/${username}`);
             const { exists } = await getDoc(ref);
             console.log('Firestore read executed!');
-            setIsValid(!exists);
+            setIsValid(exists !== null);
             setLoading(false);
         }
     }, 500), []

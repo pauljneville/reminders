@@ -1,7 +1,8 @@
 
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, firestore, fs_addDoc, fs_collection, fs_doc, fs_setDoc, fs_onSnapshot } from './firebase';
+import { auth, firestore } from './firebase';
+import { addDoc, collection, doc, setDoc, onSnapshot } from 'firebase/firestore';
 
 export function useUserData() {
     const [user] = useAuthState(auth);
@@ -12,9 +13,9 @@ export function useUserData() {
         let unsubscribe;
 
         if (user) {
-            const docRef = fs_doc(firestore, 'users', user.uid);
+            const docRef = doc(firestore, 'users', user.uid);
             // onSnapshot callback runs everytime the document is updated
-            unsubscribe = fs_onSnapshot(docRef, (doc) => {
+            unsubscribe = onSnapshot(docRef, (doc) => {
                 setUsername(doc.data()?.username);
             });
         } else {

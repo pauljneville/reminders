@@ -1,21 +1,19 @@
 import UserProfile from "../../components/UserProfile"
 import PostFeed from "../../components/PostFeed"
 import { firestore, postToJSON, getUserWithUsername } from "../../lib/firebase";
-import { getFirestore, addDoc, setDoc, doc, collection, onSnapshot, getDoc, getDocs, writeBatch, query as fs_query, where, limit, orderBy } from 'firebase/firestore'
+import { getFirestore, addDoc, setDoc, doc, collection, collectionGroup, onSnapshot, getDoc, getDocs, writeBatch, query, where, limit, orderBy } from 'firebase/firestore'
+import Metatags from "../../components/Metatags";
 
-export default function UserProfilePage({ user, posts }) {
-    return (
-        <main>
-            <UserProfile user={user} />
-            <PostFeed posts={posts} />
-        </main>
-    );
-}
-
-//run on the server every time the server is loaded
-export async function getServerSideProps({ query }) {
-    const { username } = query;
+// run on the server every time the page is loaded
+export async function getServerSideProps(context) {
+    const { username } = context.query;
     const userDoc = await getUserWithUsername(username);
+
+    if (!userDoc) {
+        return {
+            notFound: true,
+        };
+    }
 
     // JSON serializable data
     let user = null;
@@ -23,8 +21,8 @@ export async function getServerSideProps({ query }) {
 
     if (userDoc) {
         user = userDoc.data();
-        const postsRef = collection(firestore, 'posts')
-        const postsQuery = fs_query(postsRef,
+        const postsRef = collectionGroup(firestore, 'posts')
+        const postsQuery = query(postsRef,
             where('published', '==', true),
             orderBy('createdAt', 'desc'),
             limit(5)
@@ -36,4 +34,14 @@ export async function getServerSideProps({ query }) {
     return {
         props: { user, posts },
     }
+}
+
+export default function UserProfilePage({ user, posts }) {
+    return (
+        <main>
+            <Metatags title={`${user.displayName}'s posts`} />
+            <UserProfile user={user} />
+            <PostFeed posts={posts} />
+        </main>
+    );
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function PostFeed({ posts, admin = false }) {
     return (
-        posts ? posts.map((post) => <PostItem post={post} key={post.uniqueId} admin={admin} />) : null
+        posts ? posts.map((post) => <PostItem post={post} key={post.slug} admin={admin} />) : null
     );
 }
 
@@ -17,7 +17,7 @@ function PostItem({ post, admin = false }) {
                     <strong>By @{post.username}</strong>
                 </a>
             </Link>
-            <Link href={`/${post.username}/${post.uniqueId}`}>
+            <Link href={`/${post.username}/${post.slug}`}>
                 <h2>
                     <a>{post.title}</a>
                 </h2>

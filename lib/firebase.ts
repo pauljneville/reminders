@@ -1,7 +1,7 @@
 import { FirebaseApp, initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
-import { getFirestore, addDoc, setDoc, doc, collection, onSnapshot, getDoc, getDocs, writeBatch, query, where, limit, Timestamp } from 'firebase/firestore'
-import { getStorage } from 'firebase/storage'
+import { getFirestore, addDoc, setDoc, doc, collection, onSnapshot, getDoc, getDocs, writeBatch, query, where, limit, Timestamp, serverTimestamp } from 'firebase/firestore'
+import { getStorage, TaskEvent } from 'firebase/storage'
 
 const firebaseConfig = {
     apiKey: "AIzaSyCbyIN8ExXr4aLtuxOi5V5nRJcdeeFQ_DM",
@@ -57,3 +57,4 @@ export function postToJSON(doc) {
 }
 
 export const fromMillis = Timestamp.fromMillis;
+export const timestampOfServer = serverTimestamp();

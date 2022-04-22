@@ -9,7 +9,7 @@ export default function Custom404() {
             <Metatags title="404 Not Found" />
             <h1>404 - That page does not seem to exist...</h1>
             <Image src={birthdayShiba} alt="birthday shiba inu" />
-            <Link href="/">
+            <Link href="/" passHref={true}>
                 <button className="btn-blue">Go home</button>
             </Link>
         </main>

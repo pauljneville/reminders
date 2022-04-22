@@ -14,7 +14,7 @@ export default function EnterPage(props) {
     return (
         <main>
             {user ?
-                !username ? <UsernameForm /> : <SignOutButton /> : <SignInButton />
+                !username ? <UsernameForm /> : <></> : <SignInButton />
             }
         </main>
     )
@@ -32,7 +32,7 @@ const SignInButton = () => {
     };
     return (
         <button className="btn-google" onClick={signIn}>
-            <img src={'./google.png'} /> Sign in with Google
+            <img src={'/google.png'} alt="google g" />Sign in with Google
         </button>
     );
 }
@@ -70,6 +70,8 @@ const UsernameForm = () => {
     const checkUsername = useCallback(debounce(async (username) => {
         if (username.length >= 3) {
             const ref = doc(firestore, `usernames/${username}`);
+            console.log("ref");
+            console.log(ref);
             const { exists } = await getDoc(ref);
             console.log('Firestore read executed!');
             setIsValid(exists !== null);
@@ -119,18 +121,7 @@ const UsernameForm = () => {
     );
 }
 
-const SignOutButton = () => {
-    const signOut = async () => {
-        googleSignOut(auth)
-            .then(() => {
-                console.log('signout successful');
-            })
-            .catch((error) => {
-                console.error(error);
-            })
-    };
-    return <button onClick={signOut}>Sign Out</button>
-}
+
 
 function UsernameMessage({ username, isValid, loading }) {
     if (loading) {

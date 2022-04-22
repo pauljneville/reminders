@@ -1,6 +1,6 @@
 import { firestore, auth } from '../lib/firebase';
 import { useDocument } from 'react-firebase-hooks/firestore';
-import { increment, writeBatch, collection, doc } from 'firebase/firestore';
+import { increment, writeBatch, collection, doc, Timestamp } from 'firebase/firestore';
 
 // Allows user to heart or like a post
 export default function HeartButton({ postRef }) {
@@ -11,8 +11,6 @@ export default function HeartButton({ postRef }) {
     // Create a user-to-post relationship
     const addHeart = async () => {
         const uid = auth.currentUser.uid;
-        console.log("uid");
-        console.log(uid);
         const batch = writeBatch(firestore);
 
         batch.update(postRef, { heartCount: increment(1) });
@@ -31,8 +29,8 @@ export default function HeartButton({ postRef }) {
         await batch.commit();
     };
 
-    if (heartDoc?.exists) {
-        return (<button onClick={removeHeart}>💔 Unheart</button>);
+    if (heartDoc) {
+        return (<><button onClick={removeHeart}>💔 Unheart</button><button onClick={addHeart}>💗 Heart</button></>);
     } else {
         return (<button onClick={addHeart}>💗 Heart</button>);
     }

@@ -75,14 +75,15 @@ export default function PostPage(props) {
 
             <aside className="card">
                 <p>
-                    <strong>{post.heartCount || 0} 🤍</strong>
+                    <strong>{post.heartCount || 0} 🐇 following</strong>
                 </p>
 
                 <AuthCheck
                     fallback={
-                        <Link href="/enter">
-                            <button>💗 Sign Up</button>
-                        </Link>
+                        // <Link href="/enter">
+                        //     <button>💗 Sign Up</button>
+                        // </Link>
+                        <p></p>
                     }
                 >
                     <HeartButton postRef={postRef} />

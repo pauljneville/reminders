@@ -24,14 +24,14 @@ export default function Navbar() {
             <ul>
                 <li>
                     <Link href="/" passHref={true}>
-                        <button className="btn-logo">FEED</button>
+                        <a className="btn-logo">Remind Me, PLEASE!</a>
                     </Link>
                 </li>
                 {username && (
                     <>
                         <li>
                             <Link href="/admin" passHref={true}>
-                                <button className="btn-blue">Write Posts</button>
+                                <button className="btn-blue">Create Reminder</button>
                             </Link>
                         </li>
                         <li>

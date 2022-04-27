@@ -12,6 +12,8 @@ body {
   --color-green: #3bdf72;
   --color-gray: #b5bdc4;
 
+  --card-column-width: clamp(300px, 50vw, 500px);
+
   margin-top: 50px;
 }
 
@@ -148,22 +150,26 @@ button.btn-google {
   margin-right: 10px;
 }
 
-button.btn-logo {
-  background-color: var(--color-text);
-  color: white;
-  text-transform: uppercase;
+.btn-logo {
+  /* background-color: var(--color-text); */
+  color: black;
+  /* text-transform: uppercase; */
+  border: 1px solid #c5c5c5;
+  border-radius: 10px;
   font-size: 1.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem 0.7rem 1rem;
 }
 
 /* Cards */
 
 .card {
+  /* display: flex; */
   padding: 2rem;
   margin: 1rem 0;
   background-color: white;
   border: 1px solid var(--color-gray);
   border-radius: 8px;
+  width: var(--card-column-width);
 }
 
 .card footer {
@@ -182,6 +188,20 @@ button.btn-logo {
   color: white;
   background: var(--color-blue);
 }
+
+/* Row */
+.row-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0 0 1.5rem 0;
+}
+
+.row-space-between h2 {
+  padding: 0;
+  margin: 0;
+}
+
 
 /* Loader */
 
